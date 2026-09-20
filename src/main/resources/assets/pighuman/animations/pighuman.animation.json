@@ -4,6 +4,22 @@
 		"mating": {
 			"animation_length": 0.75,
 			"bones": {
+				"root": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.3333": {
+							"vector": [2, 2, 2]
+						},
+						"0.4583": {
+							"vector": [1, 1, 1]
+						},
+						"0.75": {
+							"vector": [1, 1, 1]
+						}
+					}
+				},
 				"body": {
 					"rotation": {
 						"0.0": {
