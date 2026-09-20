@@ -46,6 +46,9 @@ public class SyringeItem extends Item {
 		serverLevel.addFreshEntity(human);
 		pig.discard();
 
+		// Server -> clients: play the looping "mating" animation on the "controller" controller
+		human.triggerAnim(PigHumanEntity.CONTROLLER_NAME, PigHumanEntity.MATING_TRIGGER);
+
 		serverLevel.sendParticles(ParticleTypes.POOF, human.getX(), human.getY() + 0.9, human.getZ(), 20, 0.3, 0.5, 0.3, 0.02);
 		serverLevel.playSound(null, human.getX(), human.getY(), human.getZ(), SoundEvents.PIG_AMBIENT, SoundSource.NEUTRAL, 1.0f, 0.8f);
 

@@ -16,8 +16,29 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class PigHumanEntity extends PathfinderMob {
+public class PigHumanEntity extends PathfinderMob implements GeoEntity {
+	/** Name of the animation controller, used with {@link #triggerAnim(String, String)}. */
+	public static final String CONTROLLER_NAME = "controller";
+	/** Trigger name registered on the controller. */
+	public static final String MATING_TRIGGER = "mating";
+
+	/**
+	 * Must match the animation's key inside pighuman.animation.json exactly
+	 * (Blockbench often writes it as "animation.pighuman.mating").
+	 */
+	private static final String MATING_ANIMATION_NAME = "mating";
+	private static final RawAnimation MATING_ANIM = RawAnimation.begin().thenLoop(MATING_ANIMATION_NAME);
+
+	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+
 	public PigHumanEntity(EntityType<? extends PigHumanEntity> type, Level level) {
 		super(type, level);
 	}
@@ -26,6 +47,19 @@ public class PigHumanEntity extends PathfinderMob {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 20.0)
 				.add(Attributes.MOVEMENT_SPEED, 0.25);
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+		// Idle: nothing is playing, the model stays in its rest pose.
+		// "mating" is only played when triggered from the server (see SyringeItem) and loops until stopped.
+		controllers.add(new AnimationController<>(this, CONTROLLER_NAME, 5, state -> PlayState.STOP)
+				.triggerableAnim(MATING_TRIGGER, MATING_ANIM));
+	}
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.geoCache;
 	}
 
 	@Override

@@ -7,6 +7,17 @@ base {
 	archivesName = 'pighuman'
 }
 
+repositories {
+	// GeckoLib
+	maven {
+		name = 'GeckoLib'
+		url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+		content {
+			includeGroup('software.bernie.geckolib')
+		}
+	}
+}
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -26,6 +37,9 @@ dependencies {
 
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// GeckoLib 4.x
+	modImplementation "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
 }
 
 processResources {
