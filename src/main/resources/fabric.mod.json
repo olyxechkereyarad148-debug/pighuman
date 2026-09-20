@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "pighuman",
+  "version": "${version}",
+  "name": "Pig Human",
+  "description": "Use a syringe on a pig to turn it into a pig human.",
+  "authors": [],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.pighuman.PigHumanMod"
+    ],
+    "client": [
+      "com.pighuman.client.PigHumanClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

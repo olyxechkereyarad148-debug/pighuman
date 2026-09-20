@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:glass" },
+    { "item": "minecraft:slime_ball" }
+  ],
+  "result": {
+    "id": "pighuman:syringe",
+    "count": 1
+  }
+}
